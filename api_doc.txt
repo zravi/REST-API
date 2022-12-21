@@ -14,6 +14,7 @@ data attached : name , email , password , mobile , address , city , gender
 * to fetch record from database
 
 url : http://localhost:3000/user/fetch
+method : get
 
 data attached : if required condition object (query string)
 
@@ -26,6 +27,7 @@ response : json
 resource url : https://reqbin.com/Article/HttpDelete
 
 url : http://localhost:3000/user/delete/
+method : delete
 
 data attached : if required condition object (url params)
 
@@ -38,7 +40,25 @@ response : json
 resource url : https://reqbin.com/Article/HttpDelete
 
 url : http://localhost:3000/user/update/
+method : patch
 
 data attached : if required object is to be added which holds both(condion object + data to be updated)
 
 response : json
+
+-------------------------------------------------------
+
+* to make login from database
+
+url : http://localhost:3000/user/login/
+method : post
+
+data attached : email & password (in body)
+
+response : json
+
+-------------------------------------------------------
+
+
+
+

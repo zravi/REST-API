@@ -1,5 +1,6 @@
 import '../model/connection.js';
 import * as url from 'url';
+import jwt from 'jsonwebtoken';
 
 //to link schema model
 import UserSchemaModel from '../model/user.model.js';
@@ -42,7 +43,7 @@ export var deleteUser=async(request,response,next)=>{
 
 export var updateUser=async(request,response,next)=>{
   let userDetails = await UserSchemaModel.findOne({_id: request.body._id});
-  console.log(userDetails);
+  //console.log(userDetails);
   if(userDetails){
      let id = request.body._id;
      delete request.body._id;
@@ -54,6 +55,20 @@ export var updateUser=async(request,response,next)=>{
   }
   else
    return response.status(404).json({error: "Requested resource not available"});
+}
+
+export var login=async (req,response,next)=>{
+  var userDetails=req.body;
+  userDetails={...userDetails,"status":1};
+  var userList = await UserSchemaModel.find(userDetails);
+  if(userList.length!=0)
+  {
+    let payload={"subject":userList[0].email};  
+    let token=jwt.sign(payload,"qwdbqkbdkqwd");
+    return response.status(201).json({"token":token,"userDetails":userList[0]});
+  }
+  else
+    return response.status(500).json({"token":"error"});
 }
 
 
