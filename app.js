@@ -7,8 +7,9 @@ var app = express();
 import userRouter from './router/user.router.js';
 import categoryRouter from './router/category.router.js';
 
-//configuration to extract request body content 
-app.use(bodyParser());
+//to extract body data from request (POST , PUT , DELETE , PATCH)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use("/user",userRouter);
 app.use("/category",categoryRouter);
